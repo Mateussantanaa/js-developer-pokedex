@@ -1,150 +1,274 @@
+/* ========================
+   VARIÁVEIS GLOBAIS E ESTILOS BASE
+   ======================== */
+
+/* Adicionando variáveis de cor para facilitar a manutenção */
+:root {
+    --text-color-light: #fff;
+    --text-color-dark: #1d1d1d;
+    --number-color: rgba(23, 23, 27, 0.6);
+}
+
+body {
+    background-color: #f6f8fc; /* Um fundo um pouco mais suave que o branco puro */
+}
+
+.content h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-color-dark);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* ========================
+   GRID DE POKÉMONS
+   ======================== */
+
 .pokemons {
     display: grid;
     grid-template-columns: 1fr;
-    margin: 0;
-    padding: 0;
     list-style: none;
+    padding: 0 15px 0 0;
+    margin: 0;
+    gap: 1rem; /* Usando 'gap' para um espaçamento mais consistente */
 }
 
-.normal {
-    background-color: #a6a877;
-}
-
-.grass {
-    background-color: #77c850;
-}
-
-.fire {
-    background-color: #ee7f30;
-}
-
-.water {
-    background-color: #678fee;
-}
-
-.electric {
-    background-color: #f7cf2e;
-}
-
-.ice {
-    background-color: #98d5d7;
-}
-
-.ground {
-    background-color: #dfbf69;
-}
-
-.flying {
-    background-color: #a98ff0;
-}
-
-.poison {
-    background-color: #a040a0;
-}
-
-.fighting {
-    background-color: #bf3029;
-}
-
-.psychic {
-    background-color: #f65687;
-}
-
-.dark {
-    background-color: #725847;
-}
-
-.rock {
-    background-color: #b8a137;
-}
-
-.bug {
-    background-color: #a8b720;
-}
-
-.ghost {
-    background-color: #6e5896;
-}
-
-.steel {
-    background-color: #b9b7cf;
-}
-
-.dragon {
-    background-color: #6f38f6;
-}
-
-.fairy {
-    background-color: #f9aec7;
-}
+/* ========================
+   O NOVO CARD DO POKÉMON ✨
+   ======================== */
 
 .pokemon {
     display: flex;
     flex-direction: column;
-    margin: .5rem;
-    padding: 1rem;
-    border-radius: 1rem;
+    justify-content: space-between; /* ESSENCIAL: Empurra o conteúdo para o topo e para a base */
+    padding: 1.25rem 1rem;
+    border-radius: 1.5rem;
+    min-height: 140px; /* GARANTE UMA ALTURA MÍNIMA para todos os cards */
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+/* O DIFERENCIAL: EFEITO POKÉBOLA NO FUNDO */
+.pokemon::after {
+    content: '';
+    display: block;
+    width: 90px;
+    height: 90px;
+    background-image: url('https://raw.githubusercontent.com/otavioprimo/pokedex/main/assets/img/pokeball.png'); /* Usando uma imagem de pokébola */
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    opacity: 0.1; /* Bem sutil para não atrapalhar a leitura */
+}
+
+/* EFEITO DE HOVER PARA INTERATIVIDADE */
+.pokemon:hover {
+    transform: translateY(-8px) scale(1.03); /* Levanta e aumenta levemente o card */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15), 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .pokemon .number {
-    color: #000;
-    opacity: .3;
+    color: var(--number-color);
+    font-weight: 700; /* Dando mais peso ao número */
     text-align: right;
-    font-size: .625rem;
+    font-size: 1rem; /* Aumentando um pouco a fonte */
+    letter-spacing: 1px;
 }
 
 .pokemon .name {
+    color: var(--text-color-light);
     text-transform: capitalize;
-    color: #fff;
-    margin-bottom: .25rem;
+    font-size: 1.5rem; /* Nome mais proeminente */
+    font-weight: 700;
+    margin: 0.25rem 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* Sombra no texto para legibilidade */
 }
 
 .pokemon .detail {
     display: flex;
-    flex-direction: row;
-    align-items: center;
     justify-content: space-between;
+    align-items: flex-end; /* Alinha a imagem e os tipos na base */
 }
 
 .pokemon .detail .types {
+    list-style: none;
     padding: 0;
     margin: 0;
-    list-style: none;
+}
+
+/* ========================
+   ESTILOS DA BARRA DE BUSCA
+   ======================== */
+
+.search-container {
+    margin-bottom: 2rem;
+}
+
+.search-form {
+    display: flex;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-radius: 50px;
+}
+
+#searchInput {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 50px;
+    background-color: #fff;
+    color: #333;
+    padding-right: 60px; /* Espaço para o botão */
+}
+
+#searchInput::placeholder {
+    color: #aaa;
+}
+
+#searchButton {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    bottom: 5px;
+    width: 50px;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6c79db, #525fbc);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s ease;
+}
+
+#searchButton:hover {
+    background: linear-gradient(135deg, #525fbc, #3e4b9a);
+}
+
+#searchButton svg {
+    stroke: white;
+}
+
+.reset-button {
+    display: none; 
+    margin: 1rem auto 0;
+    background: transparent;
+    border: 2px solid #6c79db;
+    color: #6c79db;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.reset-button:hover {
+    background: #6c79db;
+    color: white;
+}
+
+.reset-button.visible {
+    display: block;
+}
+
+.not-found-message {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+    color: #777;
+    width: 100%;
 }
 
 .pokemon .detail .types .type {
-    color: #fff;
-    padding: .25rem .5rem;
-    margin: .25rem 0;
-    font-size: .625rem;
-    border-radius: 1rem;
-    filter: brightness(1.1);
+    color: var(--text-color-light);
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 0.4rem 0.8rem;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 50px
     text-align: center;
+    text-transform: capitalize;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .pokemon .detail img {
-    max-width: 100%;
-    height: 70px;
+    max-width: 110px; 
+    height: auto;
+    align-self: flex-end;
+    z-index: 1;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.2));
 }
+
+.pokemon:hover .detail img {
+    transform: scale(1.1);
+}
+
+/* ========================
+   CORES DOS TIPOS
+   ======================== */
+
+.normal { background-color: #a8a875; }
+.grass { background: linear-gradient(135deg, #78c850, #5ca935); } /* GRADIENTES! */
+.fire { background: linear-gradient(135deg, #f08030, #dd6610); }
+.water { background: linear-gradient(135deg, #6890f0, #445e9c); }
+.electric { background: linear-gradient(135deg, #f8d030, #f0b908); }
+.ice { background: linear-gradient(135deg, #98d8d8, #69c6c6); }
+.ground { background: linear-gradient(135deg, #e0c068, #d4a83a); }
+.flying { background: linear-gradient(135deg, #a890f0, #8a6ef0); }
+.poison { background: linear-gradient(135deg, #a040a0, #8a338a); }
+.fighting { background: linear-gradient(135deg, #c03028, #9d2721); }
+.psychic { background: linear-gradient(135deg, #f85888, #f01e61); }
+.dark { background: linear-gradient(135deg, #705848, #503e33); }
+.rock { background: linear-gradient(135deg, #b8a038, #9a862d); }
+.bug { background: linear-gradient(135deg, #a8b820, #8d9a1b); }
+.ghost { background: linear-gradient(135deg, #705898, #554374); }
+.steel { background: linear-gradient(135deg, #b8b8d0, #9898b0); }
+.dragon { background: linear-gradient(135deg, #7038f8, #4c08ef); }
+.fairy { background: linear-gradient(135deg, #ee99ac, #e6778f); }
+
+/* ========================
+   PAGINAÇÃO E BOTÃO
+   ======================== */
 
 .pagination {
+    padding: 2rem 0;
     display: flex;
-    flex-direction: row;
     justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 1rem;
 }
 
-.pagination button {
-    padding: .25rem .5rem;
-    margin: .25rem 0;
-    font-size: .625rem;
+#loadMoreButton {
+    background: linear-gradient(135deg, #6c79db, #525fbc);
     color: #fff;
-    background-color: #6c79db;
     border: none;
-    border-radius: 1rem;
+    border-radius: 50px;
+    padding: 1rem 2.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(108, 121, 219, 0.4);
+    transition: all 0.3s ease;
 }
+
+#loadMoreButton:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(108, 121, 219, 0.6);
+}
+
+/* ========================
+   MEDIA QUERIES (Responsividade)
+   ======================== */
 
 @media screen and (min-width: 380px) {
     .pokemons {
@@ -154,12 +278,16 @@
 
 @media screen and (min-width: 576px) {
     .pokemons {
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 }
 
 @media screen and (min-width: 992px) {
     .pokemons {
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    .content {
+        max-width: 1100px;
+        margin: 1rem auto;
     }
 }

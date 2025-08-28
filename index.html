@@ -25,14 +25,22 @@
 <body>
     <section class="content">
         <h1>Pokedex</h1>
-
+      <div class="search-container">
+            <form id="searchForm" class="search-form">
+                <input type="text" id="searchInput" placeholder="Buscar por Nome, Número ou Tipo">
+                <button type="submit" id="searchButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
+            </form>
+            <button id="resetButton" class="reset-button">Ver Todos</button>
+        </div>
         <ol id="pokemonList" class="pokemons">
             <!-- ..... Pokemons here ..... -->
         </ol>
 
         <div class="pagination">
             <button id="loadMoreButton" type="button">
-                Load More
+                Ver mais
             </button>
         </div>
     </section>
