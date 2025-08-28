@@ -52,7 +52,6 @@ body {
     cursor: pointer;
 }
 
-/* O DIFERENCIAL: EFEITO POKÉBOLA NO FUNDO */
 .pokemon::after {
     content: '';
     display: block;
@@ -64,7 +63,7 @@ body {
     position: absolute;
     right: 5px;
     bottom: 5px;
-    opacity: 0.1; /* Bem sutil para não atrapalhar a leitura */
+    opacity: 0.1;
 }
 
 /* EFEITO DE HOVER PARA INTERATIVIDADE */
